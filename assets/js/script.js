@@ -176,19 +176,22 @@ const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
 // add event to all nav link
-for (let i = 0; i < navigationLinks.length; i++) {
-  navigationLinks[i].addEventListener("click", function () {
+navigationLinks.forEach(link => {
+  link.addEventListener("click", function () {
+    const targetPage = link.textContent.trim().toLowerCase();
 
-    for (let i = 0; i < pages.length; i++) {
-      if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
-        pages[i].classList.add("active");
-        navigationLinks[i].classList.add("active");
-        window.scrollTo(0, 0);
+    // Toggle visibility for each page
+    pages.forEach(page => {
+      if (page.dataset.page === targetPage) {
+        page.classList.add("active");
+        window.scrollTo(0, 0); // scroll to top
       } else {
-        pages[i].classList.remove("active");
-        navigationLinks[i].classList.remove("active");
+        page.classList.remove("active");
       }
-    }
+    });
 
+    // Toggle active class on nav buttons
+    navigationLinks.forEach(nav => nav.classList.remove("active"));
+    link.classList.add("active");
   });
-}
+});
