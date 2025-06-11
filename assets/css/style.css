@@ -214,6 +214,14 @@ article.active {
   display: block;
   animation: fade 0.5s ease backwards;
 }
+[data-page] {
+  display: none;
+}
+
+[data-page].active {
+  display: block;
+}
+
 
 @keyframes fade {
   0% { opacity: 0; }
